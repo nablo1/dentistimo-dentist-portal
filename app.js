@@ -9,7 +9,7 @@ const mongoURI = process.env.MONGODB_URI;
 const port = process.env.PORT;
 const host = process.env.HOST
 
-const dentistsControllers = require('./routes/dentists');
+//const dentistsControllers = require('./routes/dentists');
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
     if (err) {
@@ -23,7 +23,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
 const app = express();
 app.use(bodyParser.json());
 
-app.use('/api/dentists',dentistsControllers);
+//app.use('/api/dentists',dentistsControllers);
 
 // Middleware to recognize the incoming Request Object as a JSON Object
 // HTTP request logger
