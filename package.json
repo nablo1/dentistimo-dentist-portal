@@ -1,5 +1,5 @@
 {
-  "name": "dentistimo-express-server",
+  "name": "dentist-portal",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@git.chalmers.se:courses/dit355/2020/group-9/dentistimo-express-server.git"
+    "url": "git@git.chalmers.se:courses/dit355/2020/group-9/dentist-portal.git"
   },
   "author": "",
   "license": "UNLICENSED",
