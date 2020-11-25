@@ -3,7 +3,8 @@ const dentalClinics = require('../controllers/dentalClinics')
 
 const router = express.Router()
 
-router.route('/')
+router
+  .route('/')
   .post(dentalClinics.createDentalClinic)
   .get(dentalClinics.getAllClinics)
 
