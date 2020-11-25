@@ -24,7 +24,6 @@ const dentalClinicSchema = new Schema({
     require: true,
     trim: true,
   },
-  // TODO: Require dentist schema
   dentists: [
     {
       type: Schema.Types.ObjectId,
