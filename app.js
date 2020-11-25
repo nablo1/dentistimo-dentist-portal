@@ -22,7 +22,7 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully 🥳')
 })
 
-// Logic to run server
+// Logic to run WebSocket server from app http
 wss.on('connection', socket => {
   console.log('A new client connected 👀')
   socket.send('Hello new client!')
