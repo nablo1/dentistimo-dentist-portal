@@ -11,4 +11,14 @@ module.exports = {
       next(error)
     }
   },
+
+  // Logic to get all dental clinics
+  getAllClinics: async function(req, res, next) {
+    try {
+      const dentalClinics = await DentalClinic.find(req.value)
+      res.status(200).json(dentalClinics)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
