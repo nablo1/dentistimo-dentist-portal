@@ -1,0 +1,19 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - build
+
+build:
+  stage: build
+  tags:
+    - docker
+  script:
+    - echo "Build started"
+    - npm install
+    - npm run prettier
+    - npm run dev
+    - echo "Build complete"
