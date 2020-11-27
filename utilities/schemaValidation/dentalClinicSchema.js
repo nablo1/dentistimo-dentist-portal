@@ -4,7 +4,7 @@ module.exports = {
   // Validation for new dental clinics
   newDentalClinicSchema: Joi.object().keys({
     email: Joi.string().required(),
-    password: Joi.string().required(),
+    password: Joi.string().required().min(8),
     name: Joi.string().required(),
     owner: Joi.string().required(),
   }),
