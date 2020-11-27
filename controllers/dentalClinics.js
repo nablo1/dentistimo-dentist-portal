@@ -1,12 +1,23 @@
 const DentalClinic = require('../models/dentalClinic')
+const Joi = require('joi')
+const dentalClinicValidation = require('../utilities/schemaValidation/dentalClinicSchema')
 
 module.exports = {
   // Logic to create a new dental clinic
   createDentalClinic: async function (req, res, next) {
     try {
       const dentalClinic = new DentalClinic(req.value.body)
-      await dentalClinic.save()
-      res.status(201).json(dentalClinic)
+      await Joi.validate(
+        dentalClinic,
+        dentalClinicValidation.newDentalClinic,
+        error => {
+          if (error) res.status(400).send(error)
+          else {
+            dentalClinic.save()
+            res.status(201).json(dentalClinic)
+          }
+        }
+      )
     } catch (error) {
       next(error)
     }
