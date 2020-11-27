@@ -36,12 +36,8 @@ const dentalClinicSchema = new Schema({
         type: String,
         unique: true,
       },
-      periods: [
-        {
-          start_hours: Date,
-          end_hours: Date,
-        },
-      ],
+      opening: Date,
+      closing: Date,
     },
   ],
   // Location information
@@ -63,7 +59,6 @@ const dentalClinicSchema = new Schema({
   },
   coordinates: {
     type: [Number],
-    required: true,
   },
 })
 
