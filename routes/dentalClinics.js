@@ -7,6 +7,7 @@ router
   .route('/')
   .post(dentalClinics.createDentalClinic)
   .get(dentalClinics.getAllDentalClinics)
+  .delete(dentalClinics.deleteAllDentalClinics)
 
 router
   .route('/:dentalClinicId')
