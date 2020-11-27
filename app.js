@@ -2,6 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const ws = require('ws')
 
+const dentalClinicRoute = require('./routes/dentalClinics')
+
 require('dotenv').config()
 
 const app = express()
@@ -21,6 +23,9 @@ const connection = mongoose.connection
 connection.once('open', () => {
   console.log('MongoDB database connection established successfully 🥳')
 })
+
+// Router middleware
+app.use('/api/dentalClinics', dentalClinicRoute)
 
 // Logic to run WebSocket server from app http
 wss.on('connection', socket => {
