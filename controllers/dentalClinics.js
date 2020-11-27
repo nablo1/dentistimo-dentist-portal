@@ -28,7 +28,6 @@ module.exports = {
       const dentalClinic = await DentalClinic.findById(
         req.params.dentalClinicId
       ).select(req.value.select)
-
       if (dentalClinic === null) next()
       else res.status(200).json(dentalClinic)
     } catch (error) {
@@ -42,9 +41,34 @@ module.exports = {
       const dentalClinic = await DentalClinic.findByIdAndDelete(
         req.params.dentalClinicId
       )
-
       if (dentalClinic === null) next()
       else res.status(200).json(dentalClinic)
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  // Logic to update all the data for a specific dental clinic
+  replaceDentalClinicData: async function (req, res, next) {
+    try {
+      const dentalClinic = await DentalClinic.findByIdAndUpdate(
+        req.params.dentalClinicId,
+        req.value.body
+      )
+      res.status(200).json(dentalClinic)
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  // Logic to set opening hours for a specific dental clinic
+  updateDentalClinicData: async function (req, res, next) {
+    try {
+      const dentalClinic = await DentalClinic.findByIdAndUpdate(
+        req.params.dentalClinicId,
+        req.value.body
+      )
+      res.status(200).json(dentalClinic)
     } catch (error) {
       next(error)
     }
