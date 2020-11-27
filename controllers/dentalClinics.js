@@ -1,23 +1,12 @@
 const DentalClinic = require('../models/dentalClinic')
-const Joi = require('joi')
-const dentalClinicValidation = require('../utilities/schemaValidation/dentalClinicSchema')
 
 module.exports = {
   // Logic to create a new dental clinic
   createDentalClinic: async function (req, res, next) {
     try {
-      const dentalClinic = new DentalClinic(req.value.body)
-      await Joi.validate(
-        dentalClinic,
-        dentalClinicValidation.newDentalClinic,
-        error => {
-          if (error) res.status(400).send(error)
-          else {
-            dentalClinic.save()
-            res.status(201).json(dentalClinic)
-          }
-        }
-      )
+      const dentalClinic = new DentalClinic(req.body)
+      await dentalClinic.save()
+      res.status(201).json(dentalClinic)
     } catch (error) {
       next(error)
     }
@@ -41,6 +30,16 @@ module.exports = {
       ).select(req.value.select)
       if (dentalClinic === null) next()
       else res.status(200).json(dentalClinic)
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  // Logic to delete all dental clinics, ONLY for Postamn testing
+  deleteAllDentalClinics: async function (req, res, next) {
+    try {
+      const dentalClinics = await DentalClinic.deleteMany({})
+      res.status(200).json(dentalClinics)
     } catch (error) {
       next(error)
     }
@@ -77,7 +76,7 @@ module.exports = {
     try {
       const dentalClinic = await DentalClinic.findByIdAndUpdate(
         req.params.dentalClinicId,
-        req.value.body
+        req.body
       )
       res.status(200).json(dentalClinic)
     } catch (error) {
