@@ -13,10 +13,24 @@ module.exports = {
   },
 
   // Logic to get all dental clinics
-  getAllClinics: async function (req, res, next) {
+  getAllDentalClinics: async function (req, res, next) {
     try {
       const dentalClinics = await DentalClinic.find(req.value)
       res.status(200).json(dentalClinics)
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  // Logic to get a specific dental clinic
+  getDentalClinic: async function (req, res, next) {
+    try {
+      const dentalClinic = await DentalClinic.findById(
+        req.params.dentalClinicId
+      ).select(req.value.select)
+
+      if (dentalClinic === null) next()
+      else res.status(200).json(dentalClinic)
     } catch (error) {
       next(error)
     }

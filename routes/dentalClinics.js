@@ -6,6 +6,8 @@ const router = express.Router()
 router
   .route('/')
   .post(dentalClinics.createDentalClinic)
-  .get(dentalClinics.getAllClinics)
+  .get(dentalClinics.getAllDentalClinics)
+
+router.route('/:dentalClinicId').get(dentalClinics.getDentalClinic)
 
 module.exports = router
