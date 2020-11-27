@@ -15,5 +15,5 @@ build:
     - echo "Build started"
     - npm install
     - npm run prettier
-    - npm run dev
+    # TODO: Add jobs to make this test if the server works
     - echo "Build complete"
