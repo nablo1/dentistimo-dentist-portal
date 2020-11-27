@@ -32,7 +32,10 @@ const dentalClinicSchema = new Schema({
   ],
   openingHours: [
     {
-      day: String,
+      day: {
+        type: String,
+        unique: true,
+      },
       periods: [
         {
           start_hours: Date,
