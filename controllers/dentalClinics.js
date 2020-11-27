@@ -35,4 +35,18 @@ module.exports = {
       next(error)
     }
   },
+
+  // Logic to delete a specific dental clinic
+  deleteDentalClinic: async function (req, res, next) {
+    try {
+      const dentalClinic = await DentalClinic.findByIdAndDelete(
+        req.params.dentalClinicId
+      )
+
+      if (dentalClinic === null) next()
+      else res.status(200).json(dentalClinic)
+    } catch (error) {
+      next(error)
+    }
+  },
 }

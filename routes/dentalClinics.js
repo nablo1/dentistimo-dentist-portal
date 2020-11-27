@@ -8,6 +8,9 @@ router
   .post(dentalClinics.createDentalClinic)
   .get(dentalClinics.getAllDentalClinics)
 
-router.route('/:dentalClinicId').get(dentalClinics.getDentalClinic)
+router
+  .route('/:dentalClinicId')
+  .get(dentalClinics.getDentalClinic)
+  .delete(dentalClinics.deleteDentalClinic)
 
 module.exports = router
