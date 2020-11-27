@@ -1,0 +1,105 @@
+{
+  "info": {
+    "_postman_id": "78fc5b73-ed65-45fa-a76c-1f51db317145",
+    "name": "Dentist portal",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create a new dental clinic",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "d5e34082-02d8-409d-8816-21a6d1ca8b8d",
+            "exec": [""],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"admin@hellodental.se\",\n    \"password\": \"superSecure\",\n    \"name\": \"Hello Dental\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5050/api/dentalClinics",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5050",
+          "path": ["api", "dentalClinics"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get all dental clinics",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "9ebf36b0-c1bf-40ad-8f05-8b5d192600fe",
+            "exec": [""],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5050/api/dentalClinics",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5050",
+          "path": ["api", "dentalClinics"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete all dental clinics",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "d2d4ab6e-6df8-4a9a-b9be-5e89142c2141",
+            "exec": [""],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost:5050/api/dentalClinics",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5050",
+          "path": ["api", "dentalClinics"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
