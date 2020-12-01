@@ -1,43 +1,48 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const morgan = require('morgan');
-require('dotenv').config();
+const express = require('express')
+const mongoose = require('mongoose')
+const ws = require('ws')
 
-const mongoURI = process.env.MONGODB_URI;
-const port = process.env.PORT;
-const host = process.env.HOST
+const dentalClinicRoute = require('./routes/dentalClinics')
 
-//const dentistsControllers = require('./routes/dentists');
+require('dotenv').config()
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
-    if (err) {
-        console.error(`Failed to connect to MongoDB with URI: ${mongoURI}`);
-        console.error(err.stack);
-        process.exit(1);
-    }
-    console.log(`Connected to MongoDB with URI: ${mongoURI}`);
-});
+const app = express()
+const wss = new ws.Server({ noServer: true })
+const port = process.env.PORT || 5050
 
-const app = express();
-app.use(bodyParser.json());
+app.use(express.json())
 
-//app.use('/api/dentists',dentistsControllers);
+// Connection to MongoDB Atlas database
+const uri = process.env.URI
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+})
+const connection = mongoose.connection
+connection.once('open', () => {
+  console.log('MongoDB database connection established successfully 🥳')
+})
 
-// Middleware to recognize the incoming Request Object as a JSON Object
-// HTTP request logger
-app.use(morgan('dev'));
-// Enable CORS
-app.options('*', cors());
-app.use(cors());
+// Router middleware
+app.use('/api/dentalClinics', dentalClinicRoute)
 
-app.listen(port, function(err) {
-    if (err) throw err;
-    console.log(`App listening at http://localhost:${port}`)
-});
+// Logic to run WebSocket server from app http
+wss.on('connection', socket => {
+  console.log('A new client connected 👀')
+  socket.send('Hello new client!')
+  socket.on('message', function incoming(message) {
+    console.log(`Received message: ${message}`)
+    socket.send(`Message received: ${message}`)
+  })
+})
 
-module.exports = app;
+const server = app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`)
+})
 
-
-
+server.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, socket => {
+    wss.emit('connection', socket, request)
+  })
+})
