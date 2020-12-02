@@ -27,7 +27,7 @@ module.exports = {
     try {
       const dentalClinic = await DentalClinic.findById(
         req.params.dentalClinicId
-      ).select(req.value.select)
+      )
       if (dentalClinic === null) next()
       else res.status(200).json(dentalClinic)
     } catch (error) {
@@ -63,7 +63,7 @@ module.exports = {
     try {
       const dentalClinic = await DentalClinic.findByIdAndUpdate(
         req.params.dentalClinicId,
-        req.value.body
+        req.body
       )
       res.status(200).json(dentalClinic)
     } catch (error) {
