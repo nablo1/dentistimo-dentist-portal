@@ -7,7 +7,7 @@ const dentalClinicRoute = require('./routes/dentalClinics')
 require('dotenv').config()
 
 const app = express()
-const wss = new ws.Server({ noServer: true })
+const wsS = new ws.Server({ noServer: true })
 const port = process.env.PORT || 5050
 
 app.use(express.json())
@@ -28,7 +28,7 @@ connection.once('open', () => {
 app.use('/api/dentalClinics', dentalClinicRoute)
 
 // Logic to run WebSocket server from app http
-wss.on('connection', socket => {
+wsS.on('connection', socket => {
   console.log('A new client connected 👀')
   socket.send('Hello new client!')
   socket.on('message', function incoming(message) {
@@ -42,7 +42,7 @@ const server = app.listen(port, () => {
 })
 
 server.on('upgrade', (request, socket, head) => {
-  wss.handleUpgrade(request, socket, head, socket => {
-    wss.emit('connection', socket, request)
+  wsS.handleUpgrade(request, socket, head, socket => {
+    wsS.emit('connection', socket, request)
   })
 })

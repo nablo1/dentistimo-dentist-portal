@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "78fc5b73-ed65-45fa-a76c-1f51db317145",
+		"name": "Dentist portal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new dental clinic",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d5e34082-02d8-409d-8816-21a6d1ca8b8d",
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"postman.setEnvironmentVariable('dentalClinicId', jsonData._id)",
+							"",
+							"pm.test('Response is CREATED.', function() { pm.response.to.have.status(201) })",
+							"",
+							"pm.test('Response should have valid JSON data.', function() {",
+							"    pm.expect(jsonData.email).to.eql('admin@hellodental.se')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"admin@hellodental.se\",\n    \"password\": \"superSecure\",\n    \"name\": \"Hello Dental\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/dentalClinics",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dentalClinics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all dental clinics",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ebf36b0-c1bf-40ad-8f05-8b5d192600fe",
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"var arrayLength = jsonData.length",
+							"",
+							"pm.test('Response is OK.', function() { pm.response.to.have.status(200) })",
+							"",
+							"pm.test('Last entry in the array should be the posted user.', function() {",
+							"    pm.expect(jsonData[arrayLength-1].name).to.eql('Hello Dental')  ",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/dentalClinics",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dentalClinics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all dental clinics",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d2d4ab6e-6df8-4a9a-b9be-5e89142c2141",
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"",
+							"pm.test('Response is OK.', function() { pm.response.to.have.status(200) })",
+							"",
+							"pm.test('Response should indicate deletion was successful.', function() {",
+							"    pm.expect(jsonData.ok).to.eql(1)",
+							"    pm.expect(jsonData.deletedCount).to.eql(1)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/dentalClinics",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dentalClinics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new dental clinic",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a44c8007-7759-4715-aa13-cb630a853aec",
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"postman.setEnvironmentVariable('dentalClinicId', jsonData._id)",
+							"",
+							"pm.test('Response is CREATED.', function() { pm.response.to.have.status(201) })",
+							"",
+							"pm.test('Response should have valid JSON data.', function() {",
+							"    pm.expect(jsonData.email).to.eql('admin@hellodental.se')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"admin@hellodental.se\",\n    \"password\": \"superSecure\",\n    \"name\": \"Hello Dental\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/dentalClinics",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dentalClinics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace dental clinic data by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "34cd5e16-7bf7-4073-9f0a-2580ea7f5726",
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"",
+							"pm.test('Response is OK.', function() { pm.response.to.have.status(200) })",
+							"",
+							"pm.test('Response should indicate correct user was updated.', function() {",
+							"    pm.expect(jsonData._id).to.eql(pm.environment.get('dentalClinicId'))",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"info@happysmiles.se\",\n    \"password\": \"4dmin4dmin\",\n    \"name\": \"Happy Smiles\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/dentalClinics/{{dentalClinicId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dentalClinics",
+						"{{dentalClinicId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update dental clinic data by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d635241d-224d-49ee-accf-f47ff8f66f72",
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"",
+							"pm.test('Response is OK.', function() { pm.response.to.have.status(200) })",
+							"",
+							"pm.test('Response should indicate correct user was updated.', function() {",
+							"    pm.expect(jsonData._id).to.eql(pm.environment.get('dentalClinicId'))",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"White Smiles\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/dentalClinics/{{dentalClinicId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dentalClinics",
+						"{{dentalClinicId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dental clinic by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d2728cd-10b2-46de-9642-af438f53d71f",
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"",
+							"pm.test('Response is OK.', function() { pm.response.to.have.status(200) })",
+							"",
+							"pm.test('Response should have valid JSON data.', function() {",
+							"    pm.expect(jsonData.email).to.eql('info@happysmiles.se')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/dentalClinics/{{dentalClinicId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dentalClinics",
+						"{{dentalClinicId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete dental clinic by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8998bd1d-13f8-4948-a9b3-a4dd37dd00eb",
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"",
+							"pm.test('Response is OK.', function() { pm.response.to.have.status(200) })",
+							"",
+							"pm.test('Response should indicate correct user was deleted.', function() {",
+							"    pm.expect(jsonData._id).to.eql(pm.environment.get('dentalClinicId'))",
+							"})",
+							"pm.globals.get('variable_key')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/dentalClinics/{{dentalClinicId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dentalClinics",
+						"{{dentalClinicId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
