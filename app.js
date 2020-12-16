@@ -1,14 +1,16 @@
+//work here
+
 const express = require('express')
 const mongoose = require('mongoose')
-const ws = require('ws')
+const cors = require('cors');
+var morgan = require('morgan');
 
 const dentalClinicRoute = require('./routes/dentalClinics')
 
 require('dotenv').config()
 
 const app = express()
-const wsS = new ws.Server({ noServer: true })
-const port = process.env.PORT || 5050
+const port = process.env.PORT || 3000
 
 app.use(express.json())
 
@@ -24,18 +26,14 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully 🥳')
 })
 
+app.use(morgan('dev'));
+// Enable cross-origin resource sharing for frontend must be registered before api
+app.options('*', cors());
+app.use(cors());
+
 // Router middleware
 app.use('/api/dentalClinics', dentalClinicRoute)
 
-// Logic to run WebSocket server from app http
-wsS.on('connection', socket => {
-  console.log('A new client connected 👀')
-  socket.send('Hello new client!')
-  socket.on('message', function incoming(message) {
-    console.log(`Received message: ${message}`)
-    socket.send(`Message received: ${message}`)
-  })
-})
 
 const server = app.listen(port, () => {
   console.log(`Server is running on port: ${port}`)

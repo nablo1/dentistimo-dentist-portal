@@ -2,18 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const dentalClinicSchema = new Schema({
-  // Data for end-user authentication
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    select: false,
-  },
-  // Data for dental clinic information
+  
   name: {
     type: String,
     required: true,
@@ -24,39 +13,32 @@ const dentalClinicSchema = new Schema({
     require: true,
     trim: true,
   },
-  dentists: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'dentist',
-    },
-  ],
-  openingHours: [
-    {
-      day: String,
-      opening: Date,
-      closing: Date,
-    },
-  ],
-  // Location information
-  streetAddress: {
+  dentists: {
+    type: Number
+  },
+  address: {
     type: String,
     require: true,
     trim: true,
-  },
-  postcode: {
-    type: Number,
-    require: true,
-    trim: true,
-    max: 5,
-    min: 5,
   },
   city: {
     type: String,
     require: true,
   },
-  coordinates: {
-    type: [Number],
-  },
+  coordinates: [{
+    longitude: Number,
+    latitude: Number
+  }],
+  openingHours: [
+    {
+      monday: String,
+      tuesday: String,
+      wednesday: String,
+      thursday: String,
+      friday: String
+    }
+  ]
+  
 })
 
 module.exports = mongoose.model('dentalClinic', dentalClinicSchema)
