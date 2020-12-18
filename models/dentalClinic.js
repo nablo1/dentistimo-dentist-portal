@@ -37,7 +37,13 @@ const dentalClinicSchema = new Schema({
       thursday: String,
       friday: String
     }
-  ]
+  ],
+  timeSlots: [
+    {
+        timeSlot: {type: String, unique: true}
+    }
+    ]
+
   
 })
 
