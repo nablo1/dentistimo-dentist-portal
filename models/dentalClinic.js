@@ -40,11 +40,8 @@ const dentalClinicSchema = new Schema({
   ],
   timeSlots: [
     {
-        timeSlot: {type: String, unique: true}
-    }
-    ]
-
-  
+        _id: {type:mongoose.Schema.Types.ObjectId, ref: 'TimeSlot'}
+    }] 
 })
 
 module.exports = mongoose.model('dentalClinic', dentalClinicSchema)
