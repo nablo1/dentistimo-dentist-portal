@@ -3,7 +3,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const timeSlotSchema = new Schema( {
-timeSlot: { type: String, unique: true},
+timeSlot: { 
+    type: String,
+    unique: true
+},
 dentalClinic: {type: mongoose.Schema.Types.ObjectId, ref: 'dentalClinic'}
 })
 

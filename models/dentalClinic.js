@@ -38,10 +38,9 @@ const dentalClinicSchema = new Schema({
       friday: String
     }
   ],
-  timeSlots: [
-    {
-        _id: {type:mongoose.Schema.Types.ObjectId, ref: 'TimeSlot'}
-    }] 
+  timeSlots: {
+        _id: {type:mongoose.Schema.Types.ObjectId, ref: 'timeSlot'}
+    } 
 })
 
 module.exports = mongoose.model('dentalClinic', dentalClinicSchema)
