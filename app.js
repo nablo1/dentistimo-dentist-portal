@@ -6,6 +6,7 @@ const cors = require('cors');
 var morgan = require('morgan');
 
 const dentalClinicRoute = require('./routes/dentalClinics')
+var timeSlotsController = require('./controllers/timeSlots');
 
 require('dotenv').config()
 
@@ -33,6 +34,7 @@ app.use(cors());
 
 // Router middleware
 app.use('/api/dentalClinics', dentalClinicRoute)
+app.use(timeSlotsController)
 
 
 const server = app.listen(port, () => {
