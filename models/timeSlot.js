@@ -4,10 +4,9 @@ const Schema = mongoose.Schema
 
 const timeSlotSchema = new Schema( {
 timeSlot: { 
-    type: String,
-    unique: true
+    type: String
 },
-dentalClinic: {type: mongoose.Schema.Types.ObjectId, ref: 'dentalClinic'}
+date: {type: mongoose.Schema.Types.ObjectId, ref: 'date'}
 })
 
 module.exports = mongoose.model('timeSlot', timeSlotSchema)

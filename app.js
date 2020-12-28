@@ -3,10 +3,14 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors');
-var morgan = require('morgan');
+const morgan = require('morgan');
+const path = require('path');
+const history = require('connect-history-api-fallback');
 
 const dentalClinicRoute = require('./routes/dentalClinics')
-var timeSlotsController = require('./controllers/timeSlots');
+const timeSlotsController = require('./controllers/timeSlots')
+const dateController = require('./controllers/dates');
+const passCodeController = require('./controllers/passcode');
 
 require('dotenv').config()
 
@@ -35,6 +39,35 @@ app.use(cors());
 // Router middleware
 app.use('/api/dentalClinics', dentalClinicRoute)
 app.use(timeSlotsController)
+app.use(dateController)
+app.use(passCodeController)
+
+// Catch all non-error handler for api (i.e., 404 Not Found)
+app.use('/api/*', function (req, res) {
+  res.status(404).json({ 'message': 'Not Found' });
+});
+
+app.use(history());
+
+var root = path.normalize(__dirname + '/..');
+var client = path.join(root, 'client', 'dist');
+app.use(express.static(client));
+
+
+var env = app.get('env');
+// eslint-disable-next-line no-unused-vars
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    var err_res = {
+        'message': err.message,
+        'error': {}
+    };
+    if (env === 'development') {
+        err_res['error'] = err;
+    }
+    res.status(err.status || 500);
+    res.json(err_res);
+});
 
 
 const server = app.listen(port, () => {
