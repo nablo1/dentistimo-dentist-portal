@@ -50,7 +50,7 @@ router.get(
   '/api/dentalClinics/:dentalClinicId/dates/:dateId/timeSlots/:timeSlotId',
   function (req, res, next) {
     const date_id = req.params.dateId
-    const timeSlot_id = req.params.timeSlot_id
+    const timeSlot_id = req.params.timeSlotId
     Date.findById(date_id, function (err, date) {
       if (err) {
         return next(err)
