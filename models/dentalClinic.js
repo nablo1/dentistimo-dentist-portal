@@ -25,22 +25,20 @@ const dentalClinicSchema = new Schema({
     type: String,
     require: true,
   },
-  coordinates: [{
+  coordinates: {
     longitude: Number,
     latitude: Number
-  }],
-  openingHours: [
-    {
+  },
+  openingHours: {
       monday: String,
       tuesday: String,
       wednesday: String,
       thursday: String,
       friday: String
-    }
-  ],
-  timeSlots: {
-        _id: {type:mongoose.Schema.Types.ObjectId, ref: 'timeSlot'}
-    } 
+    },
+  dates: [{
+        _id: {type:mongoose.Schema.Types.ObjectId, ref: 'date'}
+    }]
 })
 
 module.exports = mongoose.model('dentalClinic', dentalClinicSchema)
