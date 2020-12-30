@@ -11,6 +11,7 @@ const dentalClinicRoute = require('./routes/dentalClinics')
 const timeSlotsController = require('./controllers/timeSlots')
 const dateController = require('./controllers/dates');
 const passCodeController = require('./controllers/passcode');
+const requestController = require('./controllers/requests');
 
 require('dotenv').config()
 
@@ -41,6 +42,7 @@ app.use('/api/dentalClinics', dentalClinicRoute)
 app.use(timeSlotsController)
 app.use(dateController)
 app.use(passCodeController)
+app.use(requestController)
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
