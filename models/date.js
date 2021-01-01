@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const dateSchema = new Schema( {
-    date: {type: String},
+    date: {type: String, required: true},
     timeSlots:  [{
             _id: {type: mongoose.Schema.Types.ObjectId, ref: 'timeSlot'}
         }]

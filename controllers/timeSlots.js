@@ -2,7 +2,13 @@ var express = require('express')
 const TimeSlot = require('../models/timeSlot')
 const Date = require('../models/date')
 const timeSlot = require('../models/timeSlot')
+const rateLimit = require('express-rate-limit')
 var router = express.Router()
+
+/* const limiter = rateLimit({
+  windowMs: 1000 * 60 * 60 * 24, //24 hours
+  max: 2
+})  */
 
 router.post(
   '/api/dentalClinics/:dentalClinicId/dates/:dateId/timeSlots',
@@ -10,6 +16,7 @@ router.post(
     var timeSlot = new TimeSlot({
       timeSlot: req.body.timeSlot,
       date: req.params.dateId,
+      dentalClinic: req.params.dentalClinicId
     })
     timeSlot.save(function (err, timeSlot) {
       if (err) {
@@ -75,5 +82,13 @@ router.get(
     })
   }
 )
+
+router.get('/api/timeSlots', function(req, res, next) {
+  TimeSlot.find(function (err, timeSlots) {
+    if (err) { return next(err); }
+    res.status(200).json(timeSlots)   
+  }) 
+});
+
 
 module.exports = router
