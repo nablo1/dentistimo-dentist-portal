@@ -37,7 +37,7 @@ const dentalClinicSchema = new Schema({
       friday: String
     },
   dates: [{
-        _id: {type:mongoose.Schema.Types.ObjectId, ref: 'date'}
+        type: mongoose.Schema.Types.ObjectId, ref: 'date'
     }]
 })
 
