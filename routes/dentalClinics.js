@@ -6,7 +6,7 @@ const router = express.Router()
 
 const limiter = rateLimit({
   windowMs: 1000 * 60 * 60 * 24, //24 hours
-  max: 1
+  max: 2
 })  
 
 
